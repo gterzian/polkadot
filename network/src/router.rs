@@ -190,22 +190,16 @@ impl<P: ProvideRuntimeApi + Send + Sync + 'static> Router<P>
 					return
 				}
 
-				let mut gossip = network.consensus_gossip().write();
-
 				// propagate the statements
 				// consider something more targeted than gossip in the future.
 				if let Some(validity) = produced.validity {
 					let signed = table.sign_and_import(validity.clone()).0;
-					network.with_spec(|_, ctx|
-						gossip.multicast(ctx, attestation_topic, signed.encode(), false)
-					);
+					network.gossip_consensus_message(attestation_topic, signed.encode(), false);
 				}
 
 				if let Some(availability) = produced.availability {
 					let signed = table.sign_and_import(availability).0;
-					network.with_spec(|_, ctx|
-						gossip.multicast(ctx, attestation_topic, signed.encode(), false)
-					);
+					network.gossip_consensus_message(attestation_topic, signed.encode(), false);
 				}
 			})
 			.map_err(|e| debug!(target: "p_net", "Failed to produce statements: {:?}", e))
@@ -225,19 +219,23 @@ impl<P: ProvideRuntimeApi + Send> TableRouter for Router<P>
 		let (candidate, availability) = self.table.sign_and_import(GenericStatement::Candidate(receipt));
 
 		self.knowledge.lock().note_candidate(hash, Some(block_data), Some(extrinsic));
-		let mut gossip = self.network.consensus_gossip().write();
-		self.network.with_spec(|_spec, ctx| {
-			gossip.multicast(ctx, self.attestation_topic, candidate.encode(), false);
-			if let Some(availability) = availability {
-				gossip.multicast(ctx, self.attestation_topic, availability.encode(), false);
-			}
-		});
+		self.network.gossip_consensus_message(self.attestation_topic, candidate.encode(), false);
+		if let Some(availability) = availability {
+			self.network.gossip_consensus_message(self.attestation_topic, availability.encode(), false);
+		}
 	}
 
 	fn fetch_block_data(&self, candidate: &CandidateReceipt) -> BlockDataReceiver {
-		let parent_hash = self.parent_hash;
-		let rx = self.network.with_spec(|spec, ctx| { spec.fetch_block_data(ctx, candidate, parent_hash) });
-		BlockDataReceiver { inner: rx }
+		let parent_hash = self.parent_hash.clone();
+		let candidate = candidate.clone();
+		let (tx, rx) = ::futures::sync::oneshot::channel();
+		self.network.with_spec(move |spec, ctx| {
+			let inner_rx = spec.fetch_block_data(ctx, &candidate, parent_hash);
+			tx.send(inner_rx);
+		});
+		rx.map(|inner_rx| {
+			BlockDataReceiver { inner: inner_rx }
+		}).wait().ok().expect("1. Network is running, 2. it should handle the above closure successfully")
 	}
 
 	fn fetch_extrinsic_data(&self, _candidate: &CandidateReceipt) -> Self::FetchExtrinsic {
@@ -247,8 +245,8 @@ impl<P: ProvideRuntimeApi + Send> TableRouter for Router<P>
 
 impl<P> Drop for Router<P> {
 	fn drop(&mut self) {
-		let parent_hash = &self.parent_hash;
-		self.network.with_spec(|spec, _| spec.remove_consensus(parent_hash));
+		let parent_hash = self.parent_hash.clone();
+		self.network.with_spec(move |spec, _| spec.remove_consensus(&parent_hash));
 	}
 }
 

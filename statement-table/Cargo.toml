@@ -6,5 +6,5 @@ authors = ["Parity Technologies <admin@parity.io>"]
 [dependencies]
 parity-codec = "2.1"
 parity-codec-derive = "2.1"
-substrate-primitives = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
+substrate-primitives = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
 polkadot-primitives = { path = "../primitives" }

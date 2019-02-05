@@ -16,14 +16,14 @@ polkadot-parachain = { path = "../parachain" }
 polkadot-primitives = { path = "../primitives" }
 polkadot-runtime = { path = "../runtime" }
 polkadot-statement-table = { path = "../statement-table" }
-substrate-consensus-aura-primitives = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-substrate-finality-grandpa = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-substrate-consensus-common = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-substrate-primitives = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-substrate-transaction-pool = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-srml-support = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-substrate-client = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-sr-primitives = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
+substrate-consensus-aura-primitives = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+substrate-finality-grandpa = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+substrate-consensus-common = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+substrate-primitives = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+substrate-transaction-pool = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+srml-support = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+substrate-client = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+sr-primitives = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
 
 [dev-dependencies]
-substrate-keyring = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
+substrate-keyring = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }

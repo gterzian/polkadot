@@ -13,34 +13,34 @@ safe-mix = { version = "1.0", default-features = false}
 polkadot-primitives = { path = "../primitives", default-features = false }
 parity-codec = "2.1"
 parity-codec-derive = "2.1"
-substrate-serializer = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-sr-std = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-sr-io = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-srml-support = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-substrate-primitives = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-substrate-client = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-substrate-consensus-aura-primitives = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports", default-features = false }
-srml-aura = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-srml-balances = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-srml-consensus = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-srml-council = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-srml-democracy = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-srml-executive = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-srml-grandpa = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-srml-indices = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-sr-primitives = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-srml-session = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-srml-staking = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-srml-sudo = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-srml-system = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-srml-timestamp = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-srml-treasury = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-srml-upgrade-key = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-sr-version = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
+substrate-serializer = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+sr-std = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+sr-io = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+srml-support = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+substrate-primitives = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+substrate-client = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+substrate-consensus-aura-primitives = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander", default-features = false }
+srml-aura = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+srml-balances = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+srml-consensus = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+srml-council = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+srml-democracy = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+srml-executive = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+srml-grandpa = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+srml-indices = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+sr-primitives = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+srml-session = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+srml-staking = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+srml-sudo = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+srml-system = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+srml-timestamp = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+srml-treasury = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+srml-upgrade-key = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+sr-version = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
 
 [dev-dependencies]
 hex-literal = "0.1.0"
-substrate-keyring = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
+substrate-keyring = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
 
 [features]
 default = ["std"]

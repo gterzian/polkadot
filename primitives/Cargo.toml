@@ -8,14 +8,14 @@ serde = { version = "1.0", default-features = false }
 serde_derive = { version = "1.0", optional = true }
 parity-codec = { version = "2.1", default-features = false }
 parity-codec-derive = { version = "2.1", default-features = false }
-substrate-primitives = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports", default-features = false }
-substrate-client = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports", default-features = false }
-sr-version = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports", default-features = false }
-sr-std = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports", default-features = false }
-sr-primitives = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports", default-features = false }
+substrate-primitives = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+substrate-client = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+sr-version = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+sr-std = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+sr-primitives = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
 
 [dev-dependencies]
-substrate-serializer = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
+substrate-serializer = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
 pretty_assertions = "0.4"
 
 [features]

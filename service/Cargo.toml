@@ -17,12 +17,12 @@ polkadot-primitives = { path = "../primitives" }
 polkadot-runtime = { path = "../runtime" }
 polkadot-executor = { path = "../executor" }
 polkadot-network = { path = "../network"  }
-sr-io = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-sr-primitives = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-substrate-primitives = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-substrate-client = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-substrate-consensus-aura = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-substrate-finality-grandpa = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-substrate-service = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-substrate-telemetry = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
-substrate-transaction-pool = { git = "https://github.com/paritytech/substrate", branch = "alexander-backports" }
+sr-io = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+sr-primitives = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+substrate-primitives = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+substrate-client = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+substrate-consensus-aura = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+substrate-finality-grandpa = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+substrate-service = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+substrate-telemetry = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }
+substrate-transaction-pool = { git = "https://github.com/gterzian/substrate/", branch="test_protocol_rewrite_on_alexander" }

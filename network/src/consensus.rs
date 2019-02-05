@@ -152,22 +152,32 @@ impl<P, E> Network for ConsensusNetwork<P,E> where
 
 		// spin up a task in the background that processes all incoming statements
 		// TODO: propagate statements on a timer?
-		let inner_stream = self.network.consensus_gossip().write().messages_for(attestation_topic);
-		let process_task = self.network
-			.with_spec(|spec, ctx| {
-				spec.new_consensus(ctx, parent_hash, CurrentConsensus {
-					knowledge,
-					local_session_key,
-				});
 
-				MessageProcessTask {
-					inner_stream,
-					parent_hash,
-					table_router: table_router.clone(),
-					exit,
-				}
-			})
-			.then(|_| Ok(()));
+		let (tx, rx) = ::futures::sync::oneshot::channel();
+		self.network.with_gossip(move |gossip, _| {
+			let inner_rx = gossip.messages_for(attestation_topic);
+			let _ = tx.send(inner_rx);
+		});
+
+		let table_router_clone = table_router.clone();
+		let process_task = rx.map(move |inner_stream| {
+			let (tx, rx) = ::futures::sync::oneshot::channel();
+			self.network
+				.with_spec(move |spec, ctx| {
+					spec.new_consensus(ctx, parent_hash, CurrentConsensus {
+						knowledge,
+						local_session_key,
+					});
+					let process_task = MessageProcessTask {
+						inner_stream,
+						parent_hash,
+						table_router: table_router_clone,
+						exit,
+					};
+					let _ = tx.send(process_task);
+				});
+			rx.wait().ok().expect("1. Network is running, 2. it should handle the above closure successfully")
+		}).wait().ok().expect("1. Network is running, 2. it should handle the work flow successfully");
 
 		task_executor.spawn(process_task);
 
@@ -198,13 +208,16 @@ impl<P: ProvideRuntimeApi + Send + Sync + 'static, E: Clone> Collators for Conse
 	type Collation = AwaitingCollation;
 
 	fn collate(&self, parachain: ParaId, relay_parent: Hash) -> Self::Collation {
-		AwaitingCollation(
-			self.network.with_spec(|spec, _| spec.await_collation(relay_parent, parachain))
-		)
+		let (tx, rx) = ::futures::sync::oneshot::channel();
+		self.network.with_spec(move |spec, _| {
+			let collation = spec.await_collation(relay_parent, parachain);
+			tx.send(collation);
+		});
+		rx.map(AwaitingCollation).wait().ok().expect("1. Network is running, 2. it should handle the above closure successfully")
 	}
 
 	fn note_bad_collator(&self, collator: AccountId) {
-		self.network.with_spec(|spec, ctx| spec.disconnect_bad_collator(ctx, collator));
+		self.network.with_spec(move |spec, ctx| spec.disconnect_bad_collator(ctx, collator));
 	}
 }
 
